@@ -9,11 +9,39 @@ Stanford Natural Language Inference (SNLI) dataset can be downloaded from http:/
 
 Pre-trained GloVe embeddings can be downloaded from http://nlp.stanford.edu/projects/glove/
 
+note: the harvard code expects python 2.7 only.
+
+```
+conda create --name harvardSnli python=2
+conda activate harvardSnli
+pip install numpy tqdm
+```
+note to self:
+
+There is a conda environment in clara called : `decompattn_nonallennlp`
+
+
 ## Preprocessing
 First we need to process the SNLI data:
 ```
-python process-snli.py --data_filder path-to-snli-folder --out_folder path-to-output-folder
+python process-snli.py --data_folder data-local --out_folder outputs
 ```
+
+
+Have installed pytorch on this environment using :
+
+`conda install pytorch torchvision cudatoolkit=8.0 -c pytorch`
+
+after downloading snli and glove these are the two commands i ran in harvard code :
+
+```
+python preprocess.py --srcfile outputs/src-train.txt --targetfile outputs/targ-train.txt --labelfile outputs/label-train.txt --srcvalfile outputs/src-dev.txt --targetvalfile outputs/targ-dev.txt --labelvalfile outputs/label-dev.txt --srctestfile outputs/src-test.txt --targettestfile outputs/targ-test.txt --labeltestfile outputs/label-test.txt --outputfile outputs/hdf5 --glove data/glove/glove.840B.300d.txt
+```
+
+```
+python get_pretrain_vecs.py --dictionary outputs/hdf5.word.dict --glove data/glove/glove.840B.300d.txt --outputfile outputs/glove.hdf5
+```
+
 
 Then run:
 ```
