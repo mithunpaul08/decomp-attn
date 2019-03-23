@@ -5,9 +5,6 @@ Implementation of the paper [A Decomposable Attention Model for Natural Language
 The same model can be used for generic sentence pair classification tasks (e.g. paraphrase detection), in addition to natural language inference.
 
 ## Data
-Stanford Natural Language Inference (SNLI) dataset can be downloaded from http://nlp.stanford.edu/projects/snli/
-
-Pre-trained GloVe embeddings can be downloaded from http://nlp.stanford.edu/projects/glove/
 
 note: the harvard code expects python 2.7 only.
 
@@ -18,24 +15,28 @@ pip install numpy tqdm
 ```
 note to self:
 
-There is a conda environment in clara called : `decompattn_nonallennlp`
 
 
 ## Preprocessing
-First we need to process the SNLI data:
+- First segregate the FEVER data into a file full of claims, evidences and labels alone. Do this for both dev and train.
 ```
-python process-snli.py --data_folder data-local --out_folder outputs
+python process-fever.py --data_folder data-local --out_folder outputs
 ```
 
+- Next download glove from [here](http://nlp.stanford.edu/projects/glove/)
+
+**Note: you might need atleast 2 GB for both these data sets.**
 
 Have installed pytorch on this environment using :
 
 `conda install pytorch torchvision cudatoolkit=8.0 -c pytorch`
 
-after downloading snli and glove these are the two commands i ran in harvard code :
+There is a conda environment in clara called : `py2_decompattn_nonallennlp`
+
+after downloading  glove these are the two commands i ran in harvard code :
 
 ```
-python preprocess.py --srcfile outputs/src-train.txt --targetfile outputs/targ-train.txt --labelfile outputs/label-train.txt --srcvalfile outputs/src-dev.txt --targetvalfile outputs/targ-dev.txt --labelvalfile outputs/label-dev.txt --srctestfile outputs/src-test.txt --targettestfile outputs/targ-test.txt --labeltestfile outputs/label-test.txt --outputfile outputs/hdf5 --glove data/glove/glove.840B.300d.txt
+python preprocess.py --srcfile outputs/src-train.txt --targetfile outputs/targ-train.txt --labelfile outputs/label-train.txt --srcvalfile outputs/src-dev.txt --targetvalfile outputs/targ-dev.txt --labelvalfile outputs/label-dev.txt --outputfile outputs/hdf5 --glove data/glove.840B.300d.txt
 ```
 
 ```
