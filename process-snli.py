@@ -18,7 +18,7 @@ def main(arguments):
         label_out = open(os.path.join(args.out_folder, "label-"+split+".txt"), "w")
         label_set = set(["neutral", "entailment", "contradiction"])
 
-        for line in open(os.path.join(args.data_folder, "snli_1.0_"+split+".txt"),"r"):
+        for line in open(os.path.join(args.data_folder, "train_100_with_evi_sents.jsonl"),"r"):
             d = line.split("\t")
             label = d[0].strip()
             premise = " ".join(d[1].replace("(", "").replace(")", "").strip().split())
