@@ -36,7 +36,7 @@ There is a conda environment in clara called : `py2_decompattn_nonallennlp`
 after downloading  glove these are the two commands i ran in harvard code :
 
 ```
-python preprocess.py --srcfile outputs/src-train.txt --targetfile outputs/targ-train.txt --labelfile outputs/label-train.txt --srcvalfile outputs/src-dev.txt --targetvalfile outputs/targ-dev.txt --labelvalfile outputs/label-dev.txt --outputfile outputs/hdf5 --glove data/glove.840B.300d.txt
+python preprocess.py --srcfile outputs/src-train.txt --targetfile outputs/targ-train.txt --labelfile outputs/label-train.txt --srcvalfile outputs/src-dev.txt --targetvalfile outputs/targ-dev.txt --labelvalfile outputs/label-dev.txt --outputfile outputs/hdf5 --glove data-local/glove.840B.300d.txt
 ```
 
 ```
