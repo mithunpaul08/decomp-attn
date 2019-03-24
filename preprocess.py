@@ -225,12 +225,14 @@ def get_data(args):
     num_sents_train = make_vocab(args.srcfile, args.targetfile, args.labelfile,
                                              args.seqlength)
     print("Number of sentences in training: {}".format(num_sents_train))
-    num_sents_valid = make_vocab(args.srcvalfile, args.targetvalfile, args.labelvalfile,
+    num_sents_dev = make_vocab(args.srcvalfile, args.targetvalfile, args.labelvalfile,
                                              args.seqlength)
-    print("Number of sentences in valid: {}".format(num_sents_valid))
-    num_sents_test = make_vocab(args.srctestfile, args.targettestfile, args.labeltestfile,
-                                             args.seqlength)
-    print("Number of sentences in test: {}".format(num_sents_test))    
+    print("Number of sentences in valid: {}".format(num_sents_dev))
+
+    #mithun: will uncomment test partition if and when we get to it.
+    # num_sents_test = make_vocab(args.srctestfile, args.targettestfile, args.labeltestfile,
+    #                                          args.seqlength)
+    # print("Number of sentences in test: {}".format(num_sents_test))
     
     #prune and write vocab
     word_indexer.prune_vocab(0, True)
@@ -248,16 +250,16 @@ def get_data(args):
     max_sent_l = 0
     max_sent_l = convert(args.srcvalfile, args.targetvalfile, args.labelvalfile,
                          args.batchsize, args.seqlength,
-                         args.outputfile + "-val.hdf5", num_sents_valid,
+                         args.outputfile + "-val.hdf5", num_sents_dev,
                          max_sent_l, args.shuffle)
     max_sent_l = convert(args.srcfile, args.targetfile, args.labelfile,
                          args.batchsize, args.seqlength,
                          args.outputfile + "-train.hdf5", num_sents_train, 
                          max_sent_l, args.shuffle)
-    max_sent_l = convert(args.srctestfile, args.targettestfile, args.labeltestfile,
-                         args.batchsize, args.seqlength,
-                         args.outputfile + "-test.hdf5", num_sents_test, 
-                         max_sent_l, args.shuffle)    
+    # max_sent_l = convert(args.srctestfile, args.targettestfile, args.labeltestfile,
+    #                      args.batchsize, args.seqlength,
+    #                      args.outputfile + "-test.hdf5", num_sents_test,
+    #                      max_sent_l, args.shuffle)
     print("Max sent length (before dropping): {}".format(max_sent_l))    
     
 def main(arguments):
