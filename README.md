@@ -1,12 +1,6 @@
-my fork of yoon kim's DA [model](https://github.com/harvardnlp/decomp-attn). I use it for FEVER data
+my fork of yoon kim's DA [model](https://github.com/harvardnlp/decomp-attn). I use it for pre-processing/converting
+ FEVER data into hdf5 format so that it can be given as input to the [libowen DA code](https://github.com/mithunpaul08/SNLI-decomposable-attention).
 
-# Decomposable Attention Model for Sentence Pair Classification
-
-Implementation of the paper [A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/abs/1606.01933). Parikh et al. EMNLP 2016.
-
-The same model can be used for generic sentence pair classification tasks (e.g. paraphrase detection), in addition to natural language inference.
-
-## Data
 
 note: the harvard code expects python 2.7 only.
 
