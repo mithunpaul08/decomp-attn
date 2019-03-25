@@ -96,7 +96,7 @@ def get_data(args):
             targ_orig = word_indexer.clean(targ_orig.strip())                
             targ = targ_orig.strip().split()
             src = src_orig.strip().split()
-            label = label_orig.strip().split()
+            label = label_orig.strip()
             if len(targ) > seqlength or len(src) > seqlength or len(targ) < 1 or len(src) < 1:
                 continue
             num_sents += 1
@@ -108,8 +108,8 @@ def get_data(args):
                 if word in glove_vocab:
                     word_indexer.vocab[word] += 1
                         
-            for word in label:
-                label_indexer.vocab[word] += 1
+            #for word in label:
+            label_indexer.vocab[label] += 1
                 
         return num_sents
                 
@@ -132,7 +132,7 @@ def get_data(args):
             targ_orig = word_indexer.clean(targ_orig.strip())
             targ =  [word_indexer.BOS] + targ_orig.strip().split()
             src =  [word_indexer.BOS] + src_orig.strip().split()
-            label = label_orig.strip().split()
+            label = label_orig.strip()
             max_sent_l = max(len(targ), len(src), max_sent_l)
             if len(targ) > newseqlength or len(src) > newseqlength or len(targ) < 2 or len(src) < 2:
                 dropped += 1
@@ -149,7 +149,7 @@ def get_data(args):
             target_lengths[sent_id] = (targets[sent_id] != 1).sum()
             sources[sent_id] = np.array(src, dtype=int)
             source_lengths[sent_id] = (sources[sent_id] != 1).sum()            
-            labels[sent_id] = label_indexer.d[label[0]]
+            labels[sent_id] = label_indexer.d[label]
             both_lengths[sent_id] = (source_lengths[sent_id], target_lengths[sent_id])
             sent_id += 1
             if sent_id % 100000 == 0:
@@ -293,7 +293,7 @@ def main(arguments):
     
     parser.add_argument('--batchsize', help="Size of each minibatch.", type=int, default=32)
     parser.add_argument('--seqlength', help="Maximum sequence length. Sequences longer "
-                                               "than this are dropped.", type=int, default=100)
+                                               "than this are dropped.", type=int, default=1000)
     parser.add_argument('--outputfile', help="Prefix of the output file names. ",
                         type=str, default = "data/entail")
     parser.add_argument('--vocabfile', help="If working with a preset vocab, "
